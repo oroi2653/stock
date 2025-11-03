@@ -1,0 +1,65 @@
+telegram:
+  bot_token: ""
+  chat_id: ""
+
+universe:
+  source: "krx_all"
+  include_markets: ["KOSPI","KOSDAQ"]
+  exclude_markets: ["KONEX"]
+
+scan:
+  interval: "1d"
+  lookback_days: 2200
+  send_chart: true
+  max_alerts_per_run: 200
+
+signals:
+  cloud_pullback_rebreak_full:
+    enabled: true
+    tenkan: 9
+    kijun: 26
+    senkou_b: 52
+    displacement: 26
+    retrace: "into"           # "into" 또는 "below"
+    min_gap_bars: 3
+    min_retrace_bars: 1
+    require_open_cross: true  # 시가 기준 돌파
+    resistance_mode: "swing_high"
+    use_open_for_now: true    # B,C를 시가로 판정
+    bb_window: 55
+    bb_k: 2.0
+    retrace_vol_mult: 2.0     # 검색당일 거래량 ≥ (조정구간 평균 × 배수)
+
+  ichimoku_tenkan_golden_combo:
+    enabled: true
+    tenkan: 9
+    kijun: 26
+    senkou_b: 52
+    displacement: 26
+    lookback_cross_bars: 1
+    dx_period: 14
+    ma_fast: 5
+    ma_mid: 10
+
+  major_uptrend_pullback_bounce:
+    enabled: true
+    min_market_cap_krw: 100000000000
+    min_close: 1000
+    max_close: 99999999
+    min_daily_volume: 100000
+    max_daily_volume: 999999999
+    weekly_lookback: 135
+    nhigh_weeks: 299
+    week_ending: "FRI"
+
+  crash_ma_rebound:
+    enabled: true
+    min_dod_close_change: 0.01
+    max_open_to_low_drawdown: -0.03
+    min_low_to_close_rebound: 0.02
+    near_ma_tolerance: 0.005
+    ma_set: [5, 20, 60]
+
+  # 점검용(원하면 true로 켜서 파이프라인 체크)
+  sanity_ma5_gt_ma10:
+    enabled: false
