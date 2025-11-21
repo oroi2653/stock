@@ -3,7 +3,7 @@ name: scan-and-notify
 on:
   schedule:
     # 08:00 KST = 23:00 UTC (일~목)
-    - cron: "0 23 * * 0-4"
+    #- cron: "0 23 * * 0-4"
     # 16:00 KST = 07:00 UTC (월~금)
     - cron: "0 7 * * 1-5"
   workflow_dispatch:
